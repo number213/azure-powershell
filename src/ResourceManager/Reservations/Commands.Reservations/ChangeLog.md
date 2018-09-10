@@ -20,6 +20,23 @@
 -->
 ## Current Release
 
+## Version 0.1.6
+* Updated to the latest version of the Azure ClientRuntime.
+
+## Version 0.1.5
+* Updated help files to include full parameter types and correct input/output types.
+
+## Version 0.1.4
+* Updated to the latest .NET SDK version 1.8.0-preview
+* Updated Cmdlet Get-AzureRmReservationCatalog
+    - Added parameters ReservedResourceType and Location.
+    - Removed Size and Tier from Catalog response.
+    - Renamed Capabilities to SkuProperties in Catalog response.
+* Updated Cmdlet Update-AzureRmReservation
+    - Added optional InstanceFlexibility parameter.
+* Added properties to Reservation response.
+* Fixed formatting of OutputType in help files
+
 ## Version 0.1.3
 * Change Guid paramters to Guid type, not string
 * Set minimum dependency of module to PowerShell 5.0

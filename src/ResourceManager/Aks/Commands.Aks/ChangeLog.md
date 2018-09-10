@@ -19,6 +19,15 @@
 -->
 ## Current Release
 
+## Version 0.0.5
+* Updated to the latest version of the Azure ClientRuntime.
+
+## Version 0.0.4
+* Updated help files to include full parameter types and correct input/output types.
+
+## Version 0.0.3
+* No version update. Extracted AKS sdk to common for reuse in DevSpaces.
+
 ## Version 0.0.2
 * Updated to the latest version of the Azure ClientRuntime
 * Set minimum dependency of module to PowerShell 5.0
