@@ -46,26 +46,33 @@ function Test-NatGatewayCRUDMinimalParameters
     $rglocation = Get-ProviderLocation ResourceManagement;
     $rname = Get-ResourceName;
     $location = Get-ProviderLocation "Microsoft.Network/networkWatchers" "East US 2";
+    $zones = $(if(Test-CanaryLocation $location){ $null } else { @("1") })
 
     try
     {
         $resourceGroup = New-AzResourceGroup -Name $rgname -Location $rglocation;
 
         # Create NatGateway
-        $vNatGateway = New-AzNatGateway -ResourceGroupName $rgname -Name $rname -Location $location -Sku Standard -Zone "1";
+        $vNatGateway = New-AzNatGateway -ResourceGroupName $rgname -Name $rname -Location $location -Sku Standard -Zone $zones;
         Assert-NotNull $vNatGateway;
         Assert-True { Check-CmdletReturnType "New-AzNatGateway" $vNatGateway };
         Assert-AreEqual $rname $vNatGateway.Name;
-        Assert-AreEqual $vNatGateway.Zones.Count 1;
-        Assert-AreEqual $vNatGateway.Zones[0] "1";
+        Assert-AreEqual $vNatGateway.Zones.Count $zones.Length;
+        if($zones.Length)
+        {
+            Assert-AreEqualArray $vNatGateway.Zones $zones;
+        }
 
         # Get NatGateway
         $vNatGateway = Get-AzNatGateway -ResourceGroupName $rgname -Name $rname;
         Assert-NotNull $vNatGateway;
         Assert-True { Check-CmdletReturnType "Get-AzNatGateway" $vNatGateway };
         Assert-AreEqual $rname $vNatGateway.Name;
-        Assert-AreEqual $vNatGateway.Zones.Count 1;
-        Assert-AreEqual $vNatGateway.Zones[0] "1";
+        Assert-AreEqual $vNatGateway.Zones.Count $zones.Length;
+        if($zones.Length)
+        {
+            Assert-AreEqualArray $vNatGateway.Zones $zones;
+        }
 
         # Get all NatGateways in resource group
         $listNatGateway = Get-AzNatGateway -ResourceGroupName $rgname;

@@ -104,3 +104,12 @@ function Start-TestSleep($milliseconds)
         Start-Sleep -Milliseconds $milliseconds
     }
 }
+
+<#
+.SYNOPSIS
+Checks if provided location is a canary region or not
+#>
+function Test-CanaryLocation([string]$location)
+{
+    return $location.ToLower().EndsWith('euap');
+}

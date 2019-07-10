@@ -616,6 +616,11 @@ function Test-PublicIpAddressZones
     $rglocation = Get-ProviderLocation ResourceManagement
     $location = Get-ProviderLocation "Microsoft.Network/publicIpAddresses" "Central US"
 
+    if(Test-CanaryLocation $location)
+    {
+        return
+    }
+
     try
      {
       # Create the resource group
