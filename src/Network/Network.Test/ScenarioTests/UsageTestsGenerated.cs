@@ -37,7 +37,7 @@ namespace Commands.Network.Test.ScenarioTests
         {
         }
 
-        [Fact]
+        [Fact(Skip="Test")]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         [Trait(Category.Owner, NrpTeamAlias.wanrpdev)]
         public void TestUsageCRUDMinimalParameters()
